@@ -84,7 +84,7 @@ function renderQuiz() {
     return;
   }
   if (!quizState.started) {
-    quiz.innerHTML = `<div class="mission-intro"><div class="mission-art"><img class="mission-scenario" src="assets/cenario3.png" alt="Praça arborizada do bairro"><span class="art-label">✓ Aprender também é prevenir</span></div><div class="mission-intro-copy"><span class="eyebrow">DO CONHECIMENTO À ATITUDE</span><h3>Quiz.<br>Um bairro mais seguro.</h3><p>Em situações do dia a dia, saber como agir faz toda a diferença. Descubra as atitudes mais seguras.</p><div class="mission-tags"><span>3 situações reais do cotidiano</span><span>No seu ritmo</span></div><button class="button" data-start>Começar quiz →</button></div></div>`;
+    quiz.innerHTML = `<div class="mission-intro"><div class="mission-art"><img class="mission-scenario" src="assets/cenario3.png" alt="Praça arborizada do bairro"><span class="art-label">✓ Aprender também é prevenir</span></div><div class="mission-intro-copy"><span class="eyebrow">DO CONHECIMENTO À ATITUDE</span><h3>Um bairro mais seguro.</h3><p>Em situações do dia a dia, saber como agir faz toda a diferença. Descubra as atitudes mais seguras.</p><div class="mission-tags"><span>3 situações reais do cotidiano</span><span>No seu ritmo</span></div><button class="button" data-start>Começar quiz →</button></div></div>`;
     quiz.querySelector("[data-start]").onclick = () => {
       quizState.started = true;
       renderQuiz();
