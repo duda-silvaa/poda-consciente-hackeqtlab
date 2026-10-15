@@ -1,1 +1,1 @@
-# Desafio - PODA CONSCIENTE EQT LAB
+# hackathon eqt lab - PODA CONSCIENTE 
