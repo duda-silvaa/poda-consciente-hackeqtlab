@@ -492,7 +492,7 @@ h1 > span,
   max-width: 415px;
   font-size: 14px;
   line-height: 1.8;
-  color: #607580;
+  color: #234252;
 }
 .main-cta {
   margin-top: 27px;
@@ -503,7 +503,7 @@ h1 > span,
   gap: 8px;
   margin-top: 20px;
   font-size: 10px;
-  color: #607580;
+  color: #234252;
 }
 .hero-trust svg {
   color: #3c9170;
@@ -534,6 +534,39 @@ h1 > span,
   width: 46%;
   max-width: 560px;
 }
+.growth-section .stage-copy,
+.risks-section .stage-copy h2 {
+  font-size: 42px;
+  margin-bottom: 18px;
+}
+.risks-section .risk-grid {
+  gap: 10px;
+  margin-top: 20px;
+}
+.risks-section .risk-card {
+  padding: 14px;
+}
+.risks-section .risk-icon {
+  width: 30px;
+  height: 30px;
+  margin-bottom: 8px;
+}
+.risks-section .risk-card h3 {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+.risks-section .risk-card p {
+  font-size: 10px;
+  line-height: 1.5;
+}
+.risks-section .stage-copy {
+  padding: 22px 28px;
+  margin-left: -34px;
+  background: rgba(247, 251, 248, 0.86);
+  border-radius: 6px;
+  box-shadow: 0 10px 30px rgba(35, 66, 82, 0.08);
+  backdrop-filter: blur(8px);
+}
 .step-kicker {
   display: flex;
   align-items: center;
@@ -561,7 +594,7 @@ h1 > span,
 .stage-copy > p {
   font-size: 15px;
   line-height: 1.8;
-  color: #607580;
+  color: #234252;
   max-width: 440px;
   margin-bottom: 16px;
 }
@@ -605,7 +638,7 @@ h1 > span,
 .risk-card p {
   font-size: 11px;
   line-height: 1.65;
-  color: #607580;
+  color: #234252;
 }
 .danger-section,
 .prevention-section {
@@ -728,12 +761,12 @@ h1 > span,
 }
 .section-heading > p {
   font-size: 14px;
-  color: #607580;
+  color: #234252;
   line-height: 1.7;
 }
 /* Área das missões e cartões do quiz. */
 .missions-section {
-  background: linear-gradient(#dff2f4, #f7fbf8 160px);
+  background: linear-gradient(180deg, #d6eee1 0%, #e4f3ec 68%, #f7fbf8 100%);
   padding-top: 110px;
 }
 .mission-intro,
@@ -801,7 +834,7 @@ h1 > span,
 .mission-intro-copy p {
   font-size: 14px;
   line-height: 1.8;
-  color: #607580;
+  color: #234252;
 }
 .mission-tags {
   display: flex;
@@ -868,7 +901,7 @@ h1 > span,
 .quiz-question {
   font-size: 13px;
   line-height: 1.7;
-  color: #607580;
+  color: #234252;
 }
 .quiz-options {
   display: grid;
@@ -930,7 +963,7 @@ h1 > span,
 .quiz-feedback p {
   font-size: 11px;
   line-height: 1.75;
-  color: #607580;
+  color: #234252;
 }
 .quiz-bottom {
   margin-top: 20px;
@@ -941,7 +974,7 @@ h1 > span,
 }
 .quiz-bottom > span {
   font-size: 10px;
-  color: #607580;
+  color: #234252;
 }
 .quiz-complete {
   text-align: center;
@@ -1027,7 +1060,7 @@ h1 > span,
 .guidance-card p {
   font-size: 12px;
   line-height: 1.85;
-  color: #607580;
+  color: #234252;
 }
 .guidance-phone {
   display: flex;
@@ -1053,18 +1086,30 @@ h1 > span,
   font-size: 12px;
 }
 .neighborhood-section {
-  background: #e4f3ec;
+  background-color: #e4f3ec;
+  background-image:
+    linear-gradient(rgba(228, 243, 236, 0.58), rgba(228, 243, 236, 0.66)),
+    url("assets/bairro.jpg");
+  background-position: center;
+  background-size: cover;
 }
 .neighborhood-inner {
+  max-width: 980px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 100px;
+  gap: 72px;
   align-items: center;
+  padding: 30px 34px;
+  border-radius: 8px;
+  background: rgba(247, 251, 248, 0.88);
+  box-shadow: 0 16px 40px rgba(35, 66, 82, 0.16);
+  backdrop-filter: blur(5px);
 }
 .neighborhood-copy h2 {
-  font-size: 58px;
+  font-size: 52px;
   line-height: 1.05;
   margin: 0 0 23px;
+  white-space: nowrap;
 }
 .neighborhood-copy > p {
   font-size: 20px;
@@ -1074,12 +1119,12 @@ h1 > span,
   font-size: 13px !important;
   line-height: 1.9 !important;
   max-width: 400px;
-  color: #607580;
+  color: #234252;
   margin: 18px 0 25px;
 }
 .share-status {
   font-size: 10px !important;
-  color: #607580;
+  color: #234252;
   margin-top: 15px;
   max-width: 400px;
 }
@@ -1111,7 +1156,7 @@ h1 > span,
 }
 .community-step p {
   font-size: 11px;
-  color: #607580;
+  color: #234252;
   line-height: 1.7;
   margin-top: 5px;
 }
@@ -1152,7 +1197,7 @@ h1 > span,
 .about-inner > p {
   font-size: 14px;
   line-height: 1.9;
-  color: #607580;
+  color: #234252;
 }
 .about-inner .proposal-note {
   font-size: 11px;
@@ -1296,6 +1341,14 @@ h1 > span,
     width: 100%;
     max-width: none;
   }
+  .growth-section .stage-copy,
+  .risks-section .stage-copy {
+    margin-left: 0;
+    padding: 24px;
+  }
+  .risks-section .stage-copy h2 {
+    font-size: 33px;
+  }
   h1 {
     font-size: 57px;
   }
@@ -1360,9 +1413,11 @@ h1 > span,
   .neighborhood-inner {
     grid-template-columns: 1fr;
     gap: 45px;
+    padding: 26px 24px;
   }
   .neighborhood-copy h2 {
     font-size: 47px;
+    white-space: normal;
   }
   .about-inner h2 {
     font-size: 32px;
