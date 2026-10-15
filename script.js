@@ -47,7 +47,6 @@ const missions = [
 
 // Pontos determinísticos usados para formar a copa da árvore em SVG.
 const foliage = Array.from({ length: 100 }, (_, i) => {
-
   // Ângulo e raio distribuídos matematicamente evitam uma copa uniforme demais.
   const angle = i * 2.399963;
   const radius = Math.sqrt(i / 100);
@@ -61,7 +60,6 @@ const foliage = Array.from({ length: 100 }, (_, i) => {
 
 // Gera a ilustração da árvore para a cena principal e para o quiz.
 function tree() {
-
   // As classes do SVG são estilizadas no CSS e recebem escala durante o scroll.
   return `<svg class="living-tree" viewBox="0 0 520 650" role="img" aria-label="Árvore saudável no bairro"><ellipse class="tree-shadow" cx="260" cy="624" rx="117" ry="17"/><g class="tree-growth"><path class="trunk" d="M224 625 C250 545 223 487 247 404 C255 338 241 267 254 181 L269 176 C262 259 281 325 270 390 C262 476 283 555 297 625Z"/><path class="bark" d="M250 602 Q264 529 255 467 M263 420 Q255 340 264 269 M238 572 L249 526 M281 610 L270 548"/><g class="branches"><path d="M255 439 Q193 379 151 246 M257 394 Q321 322 355 191 M258 327 Q208 268 193 143 M269 336 Q304 238 298 119 M229 390 Q165 352 98 334 M294 306 Q354 282 411 234 M213 308 Q167 302 130 271 M313 277 Q341 213 383 178"/></g><g class="tree-crown">${foliage.map((leaf) => `<circle class="leaf-tone-${leaf.tone}" cx="${leaf.x}" cy="${leaf.y}" r="${leaf.r}"/>`).join("")}</g><path class="branch-front" d="M261 421 Q225 337 216 285 M264 384 Q305 327 332 291 M255 340 L270 258"/></g><g class="grass"><path d="M201 623 l-12 -25 23 18 -3 -33 18 34 11 -27 8 35 M284 624 l12 -28 2 25 19 -16 -6 20"/></g></svg>`;
 }
@@ -76,15 +74,52 @@ let quizState = { started: false, step: 0, answer: null, complete: false };
 
 // Redesenha apenas o bloco do quiz sempre que o estado muda.
 function renderQuiz() {
-
   // Primeiro estado: mostra a mensagem de apresentação e o botão de início.
   if (quizState.complete) {
-    quiz.innerHTML = `<div class="quiz-complete"><span class="completion-icon">✓</span><span class="eyebrow">QUIZ CONCLUÍDO</span><h3>Conhecimento que protege.</h3><p>Você concluiu o quiz. Leve estas atitudes para o seu dia a dia:</p><ul><li>✓ Rede elétrica por perto? Não intervenha. Ligue 116.</li><li>✓ Árvore em espaço público? Procure o órgão municipal.</li><li>✓ No terreno particular? Conte com um profissional qualificado.</li></ul><div class="quiz-actions"><button class="button outline" data-restart>Refazer o quiz</button></div></div>`;
+    quiz.innerHTML = `
+      <div class="quiz-complete">
+        <span class="completion-icon">✓</span>
+        <span class="eyebrow">QUIZ CONCLUÍDO</span>
+        <h3>Conhecimento que protege.</h3>
+        <p>Você concluiu o quiz. Leve estas atitudes para o seu dia a dia:</p>
+        <ul>
+          <li>✓ Rede elétrica por perto? Não intervenha. Ligue 116.</li>
+          <li>✓ Árvore em espaço público? Procure o órgão municipal.</li>
+          <li>✓ No terreno particular? Conte com um profissional qualificado.</li>
+        </ul>
+        <div class="quiz-actions">
+          <button class="button outline" data-restart>Refazer o quiz</button>
+        </div>
+      </div>
+    `;
     quiz.querySelector("[data-restart]").onclick = restartQuiz;
     return;
   }
   if (!quizState.started) {
-    quiz.innerHTML = `<div class="mission-intro"><div class="mission-art"><img class="mission-scenario" src="assets/cenario3.png" alt="Praça arborizada do bairro"><span class="art-label">✓ Aprender também é prevenir</span></div><div class="mission-intro-copy"><span class="eyebrow">DO CONHECIMENTO À ATITUDE</span><h3>Um bairro mais seguro.</h3><p>Em situações do dia a dia, saber como agir faz toda a diferença. Descubra as atitudes mais seguras.</p><div class="mission-tags"><span>3 situações reais do cotidiano</span><span>No seu ritmo</span></div><button class="button" data-start>Começar quiz →</button></div></div>`;
+    quiz.innerHTML = `
+      <div class="mission-intro">
+        <div class="mission-art">
+          <img
+            class="mission-scenario"
+            src="assets/cenario3.png"
+            alt="Praça arborizada do bairro"
+          />
+        </div>
+        <div class="mission-intro-copy">
+          <span class="eyebrow">DO CONHECIMENTO À ATITUDE</span>
+          <h3>Um bairro mais seguro.</h3>
+          <p>
+            Em situações do dia a dia, saber como agir faz toda a diferença.
+            Descubra as atitudes mais seguras.
+          </p>
+          <div class="mission-tags">
+            <span>3 situações reais do cotidiano</span>
+            <span>No seu ritmo</span>
+          </div>
+          <button class="button" data-start>Começar quiz →</button>
+        </div>
+      </div>
+    `;
     quiz.querySelector("[data-start]").onclick = () => {
       quizState.started = true;
       renderQuiz();
@@ -96,18 +131,98 @@ function renderQuiz() {
   const mission = missions[quizState.step];
   const answered = quizState.answer !== null;
   const correct = quizState.answer === mission.correct;
-  quiz.innerHTML = `<div class="quiz-active"><div class="quiz-visual"><img class="mission-scenario" src="${mission.scenario}" alt="Cenário do quiz ${quizState.step + 1}"></div><div class="quiz-body"><div class="quiz-progress"><span>Quiz ${quizState.step + 1} de 3</span><div>${missions.map((_, i) => `<i class="${i <= quizState.step ? "is-active" : ""}"></i>`).join("")}</div></div><h3>${mission.title}</h3><p class="quiz-question">${mission.situation}</p><div class="quiz-options">${mission.options.map((option, i) => `<button class="quiz-option ${answered && i === mission.correct ? "is-correct" : ""} ${answered && i === quizState.answer && !correct ? "is-incorrect" : ""}" data-answer="${i}" ${answered ? "disabled" : ""}><span class="option-letter">${answered && i === mission.correct ? "✓" : answered && i === quizState.answer ? "×" : String.fromCharCode(65 + i)}</span><span>${option}</span></button>`).join("")}</div>${answered ? `<div class="quiz-feedback ${correct ? "feedback-correct" : ""}" role="status"><strong>${correct ? "Isso mesmo! Uma atitude segura." : "Vamos aprender juntos? A atitude segura é outra."}</strong><p>${mission.feedback}</p></div>` : ""}<div class="quiz-bottom"><span>${answered ? "Cada atitude segura faz a diferença." : "Escolha uma atitude para continuar."}</span><button class="button" data-next ${answered ? "" : "disabled"}>${quizState.step === 2 ? "Concluir quiz" : "Próxima pergunta"} →</button></div></div></div>`;
+  const optionsMarkup = mission.options
+    .map(
+      (option, i) => `
+        <button
+          class="quiz-option ${
+            answered && i === mission.correct ? "is-correct" : ""
+          } ${
+            answered && i === quizState.answer && !correct ? "is-incorrect" : ""
+          }"
+          data-answer="${i}"
+          ${answered ? "disabled" : ""}
+        >
+          <span class="option-letter">
+            ${
+              answered && i === mission.correct
+                ? "✓"
+                : answered && i === quizState.answer
+                  ? "×"
+                  : String.fromCharCode(65 + i)
+            }
+          </span>
+          <span>${option}</span>
+        </button>
+      `,
+    )
+    .join("");
+  const feedbackMarkup = answered
+    ? `
+        <div
+          class="quiz-feedback ${correct ? "feedback-correct" : ""}"
+          role="status"
+        >
+          <strong>
+            ${
+              correct
+                ? "Isso mesmo! Uma atitude segura."
+                : "Vamos aprender juntos? A atitude segura é outra."
+            }
+          </strong>
+          <p>${mission.feedback}</p>
+        </div>
+      `
+    : "";
+  quiz.innerHTML = `
+    <div class="quiz-active">
+      <div class="quiz-visual">
+        <img
+          class="mission-scenario"
+          src="${mission.scenario}"
+          alt="Cenário do quiz ${quizState.step + 1}"
+        />
+      </div>
+      <div class="quiz-body">
+        <div class="quiz-progress">
+          <span>Quiz ${quizState.step + 1} de 3</span>
+          <div>
+            ${missions
+              .map(
+                (_, i) =>
+                  `<i class="${i <= quizState.step ? "is-active" : ""}"></i>`,
+              )
+              .join("")}
+          </div>
+        </div>
+        <h3>${mission.title}</h3>
+        <p class="quiz-question">${mission.situation}</p>
+        <div class="quiz-options">${optionsMarkup}</div>
+        ${feedbackMarkup}
+        <div class="quiz-bottom">
+          <span>
+            ${
+              answered
+                ? "Cada atitude segura faz a diferença."
+                : "Escolha uma atitude para continuar."
+            }
+          </span>
+          <button class="button" data-next ${answered ? "" : "disabled"}>
+            ${quizState.step === 2 ? "Concluir quiz" : "Próxima pergunta"} →
+          </button>
+        </div>
+      </div>
+    </div>
+  `;
   quiz.querySelectorAll("[data-answer]").forEach(
     (button) =>
       (button.onclick = () => {
-
         // O índice da alternativa clicada é guardado para comparar com `correct`.
         quizState.answer = Number(button.dataset.answer);
         renderQuiz();
       }),
   );
   quiz.querySelector("[data-next]").onclick = () => {
-
     // Na última missão, o próximo clique troca o quiz para a tela de conclusão.
     if (quizState.step === 2) quizState.complete = true;
     else {
@@ -208,7 +323,6 @@ function updateStory() {
   );
 }
 function onScroll() {
-    
   // requestAnimationFrame evita recalcular o layout dezenas de vezes por segundo.
   cancelAnimationFrame(frame);
   frame = requestAnimationFrame(updateStory);
