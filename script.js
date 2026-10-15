@@ -68,7 +68,7 @@ function tree() {
 
 // A cena fixa combina a foto do bairro, a árvore, a rede elétrica e os vaga-lumes.
 document.querySelector("#scene").innerHTML =
-  `<div class="story-scene" aria-hidden="true"><img class="neighborhood" src="assets/neighborhood.jpg" alt=""><div class="scene-night"></div><div class="sun"></div><div class="scene-tree">${tree()}</div><svg class="power-lines" viewBox="-120 0 840 700"><g class="wire"><path d="M-100 208 Q300 330 700 209 M-100 230 Q300 352 700 232 M-100 254 Q300 372 700 256"/></g><g class="pole"><path d="M-40 680 L-40 213 M-95 227 L15 227 M-90 246 L10 246"/><path class="pole-light" d="M-35 680 L-35 214"/></g><g class="pole"><path d="M640 680 L640 213 M585 227 L695 227 M595 246 L689 246"/><path class="pole-light" d="M645 680 L645 214"/></g><g class="insulator"><path d="M-83 225v-19 M-42 225v-19 M2 225v-19 M597 225v-19 M638 225v-19 M685 225v-19"/></g></svg><div class="fireflies">${Array.from({ length: 18 }, (_, i) => `<i class="firefly firefly-${i}"></i>`).join("")}</div><div class="scene-caption"><span></span> Uma árvore. Muitas vidas conectadas.</div></div>`;
+  `<div class="story-scene" aria-hidden="true"><img class="neighborhood" src="assets/neighborhood.jpg" alt=""><div class="scene-night"></div><div class="sun"></div><div class="scene-tree">${tree()}</div><div class="tree-safety-signs"><strong class="tree-note-116">116</strong><span class="tree-note-distance">Mantenha distância</span><span class="tree-note-touch">Não toque nos fios</span></div><svg class="power-lines" viewBox="-120 0 840 700"><g class="wire"><path d="M-100 208 Q300 330 700 209 M-100 230 Q300 352 700 232 M-100 254 Q300 372 700 256"/></g><g class="pole"><path d="M-40 680 L-40 213 M-95 227 L15 227 M-90 246 L10 246"/><path class="pole-light" d="M-35 680 L-35 214"/></g><g class="pole"><path d="M640 680 L640 213 M585 227 L695 227 M595 246 L689 246"/><path class="pole-light" d="M645 680 L645 214"/></g><g class="insulator"><path d="M-83 225v-19 M-42 225v-19 M2 225v-19 M597 225v-19 M638 225v-19 M685 225v-19"/></g></svg><div class="fireflies">${Array.from({ length: 18 }, (_, i) => `<i class="firefly firefly-${i}"></i>`).join("")}</div><div class="scene-caption"><span></span> Uma árvore. Muitas vidas conectadas.</div></div>`;
 
 // O quiz é uma pequena máquina de estados: introdução, pergunta, feedback e conclusão.
 const quiz = document.querySelector("#quiz");
@@ -167,6 +167,9 @@ document.querySelector("#share").onclick = async (event) => {
 
 // Atualiza crescimento, iluminação e marcador conforme a pessoa rola a história.
 const story = document.querySelector(".story");
+const risksSection = document.querySelector(".risks-section");
+const dangerSection = document.querySelector(".danger-section");
+const preventionSection = document.querySelector(".prevention-section");
 let frame = 0;
 function updateStory() {
   const rect = story.getBoundingClientRect();
@@ -184,13 +187,25 @@ function updateStory() {
     String(Math.min(1, Math.max(0, (progress - 0.4) / 0.4))),
   );
   story.style.setProperty("--sunset", String(Math.sin(progress * Math.PI)));
-
   // Divide a história em cinco etapas para atualizar os pontos laterais.
   const stage = Math.min(4, Math.floor(progress * 5));
   document
     .querySelectorAll(".track-dot")
     .forEach((dot, i) => dot.classList.toggle("active", i === stage));
   document.querySelector(".track-number").textContent = `0${stage + 1}`;
+  const revealPoint = innerHeight * 0.7;
+  story.classList.toggle(
+    "show-tree-notes",
+    risksSection.getBoundingClientRect().top <= revealPoint,
+  );
+  story.classList.toggle(
+    "show-tree-note-distance",
+    dangerSection.getBoundingClientRect().top <= revealPoint,
+  );
+  story.classList.toggle(
+    "show-tree-note-touch",
+    preventionSection.getBoundingClientRect().top <= revealPoint,
+  );
 }
 function onScroll() {
     
