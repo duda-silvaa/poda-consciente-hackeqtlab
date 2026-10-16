@@ -548,6 +548,7 @@ h1 > span,
 }
 .risks-section .risk-card {
   padding: 14px;
+  background: rgba(255, 255, 255, 0.72);
 }
 .risks-section .risk-icon {
   width: 30px;
@@ -565,7 +566,7 @@ h1 > span,
 .risks-section .stage-copy {
   padding: 22px 28px;
   margin-left: -34px;
-  background: rgba(247, 251, 248, 0.86);
+  background: rgba(247, 251, 248, 0.5);
   border-radius: 6px;
   box-shadow: 0 10px 30px rgba(35, 66, 82, 0.08);
   backdrop-filter: blur(8px);
