@@ -1265,6 +1265,7 @@ h1 > span,
   margin: 18px auto 29px;
 }
 .site-footer {
+  position: relative;
   padding: 28px 5%;
   background: #1b3b54;
   color: white;
@@ -1291,6 +1292,13 @@ h1 > span,
 .site-footer > a {
   font-size: 10px;
   opacity: 0.8;
+}
+.footer-proposal {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
 }
 .reveal {
   opacity: 0;
@@ -1371,6 +1379,12 @@ h1 > span,
   }
   .site-footer {
     flex-wrap: wrap;
+  }
+  .footer-proposal {
+    position: static;
+    transform: none;
+    flex: 1;
+    text-align: center;
   }
 }
 @media (max-width: 600px) {
@@ -1515,6 +1529,10 @@ h1 > span,
   }
   .footer-brand {
     width: 100%;
+  }
+  .footer-proposal {
+    flex: 1 1 100%;
+    order: 3;
   }
 }
 @media (prefers-reduced-motion: reduce) {
